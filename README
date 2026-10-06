@@ -1,0 +1,168 @@
+## Identificação
+
+- **Nome do aluno:** Davi Santana
+- **Curso:** Informática
+- **Unidade Curricular:** Desenvolver Serviços Web
+
+## Como Clonar o Projeto
+
+Substitua `URL_DO_REPOSITORIO` pela URL do repositorio:
+
+```bash
+git clone URL_DO_REPOSITORIO
+cd cliente
+```
+
+## Como Instalar as Dependências
+
+Na pasta do projeto, execute:
+
+```bash
+composer install
+```
+
+## Como Executar o Projeto
+
+Na raiz do projeto, inicie o servidor PHP:
+
+```bash
+php -S localhost:8080 -t cliente cliente/index.php
+```
+
+A API ficará disponível em `http://localhost:8080`.
+
+## Documentação dos Endpoints
+
+Os exemplos abaixo consideram a URL base `http://localhost:8080` e os dados iniciais definidos em `cliente/index.php`.
+
+### Verificar status
+
+- **Metodo:** `GET`
+- **URL:** `/status`
+- **Resposta:** `200 OK`
+- **Print:** ![alt text](./img/image.png)
+```json
+{"status":"ok"}
+```
+
+### Listar usuários
+
+- **Metodo:** `GET`
+- **URL:** `/usuarios`
+- **Resposta:** `200 OK`
+- **Print:** ![alt text](./img/image2.png)
+```json
+[
+    {"id": 1, "nome": "John Doe", "email": "john.doe@example.com", "senha": "123456"},
+    {"id": 2, "nome": "Jane Smith", "email": "jane.smith@example.com", "senha": "654321"},
+    {"id": 3, "nome": "Alice Johnson", "email": "alice.johnson@example.com", "senha": "987654"}, 
+    {"id": 4, "nome": "Bob Brown", "email": "bob.brown@example.com", "senha": "555555"},
+    {"id": 5, "nome": "Charlie Davis", "email": "charlie.davis@example.com", "senha": "111111"}
+]
+```
+
+### Consultar usuário por ID
+
+- **Metodo:** `GET`
+- **URL:** `/usuarios/{id}`
+- **Resposta:** `200 OK`
+- **Print:** ![alt text](./img/image3.png)
+```json
+{"id": 1, "nome": "John Doe", "email": "john.doe@example.com", "senha": "123456"}
+```
+
+### Consultar usuário por ID - erro
+
+- **Metodo:** `GET`
+- **URL:** `/usuarios/{id}`
+- **Resposta:** `404 Not Found`
+- **Print:** ![alt text](./img/image4.png)
+```json
+{"erro": "Usuário não encontrado"}
+```
+
+### Buscar usuário por nome
+
+- **Metodo:** `GET`
+- **URL:** `/usuarios?nome=jo`
+- **Resposta:** `200 OK`
+- **Print:** ![alt text](./img/image5.png)
+```json
+[
+    {"id": 1, "nome": "John Doe", "email": "john.doe@example.com", "senha": "123456"}
+]
+```
+
+### Criar usuário
+
+- **Metodo:** `POST`
+- **URL:** `/usuarios`
+- **Body:**
+```json
+{
+    "nome": "Novo Usuário",
+    "email": "novo@teste.com",
+    "idade": 25,
+    "login": "teste",
+    "senha": "123"
+}
+```
+- **Resposta:** `201 Created`
+- **Print:** ![alt text](./img6/image6.png)
+```json
+{"id": 6, "nome": "Novo Usuário", "email": "novo@teste.com", "idade": 25, "login": "teste", "senha": "123"}
+```
+
+### Atualizar usuário
+
+- **Metodo:** `PUT`
+- **URL:** `/usuarios/{id}`
+- **Print:** ![alt text](./img/image7.png)
+- **Body:**
+```json
+{
+    "nome": "John Doe Atualizado",
+    "email": "john.atualizado@example.com",
+    "login": "johndoeatualizado",
+}
+```
+- **Resposta:** `200 OK`
+```json
+{"id": 1, "nome": "John Doe Atualizado", "email": "john.atualizado@example.com", "login": "johndoeatualizado"}
+```
+
+### Atualizar senha do usuário
+
+- **Metodo:** `PUT`
+- **URL:** `/usuarios/{id}/senha`
+- **Print:** ![alt text](./img/image8.png)
+- **Body:**
+```json
+{
+    "senha": "novasenha123"
+}
+```
+- **Resposta:** `200 OK`
+```json
+{"id": 1, "nome": "John Doe", "email": "john.doe@example.com", "senha": "novasenha123"}
+```
+
+### Excluir usuário
+
+- **Metodo:** `DELETE`
+- **URL:** `/usuarios/{id}`
+- **Resposta:** `200 OK`
+- **Print:** ![alt text](./img/image9.png)
+```json
+{"mensagem": "Usuário removido com sucesso"}
+```
+
+### Usuário não encontrado
+
+- **Metodo:** `DELETE`
+- **URL:** `/usuarios/{id}`
+- **Resposta:** `404 Not Found`
+- **Print:** ![alt text](./img/image10.png)
+```json
+{"erro": "Usuário não encontrado"}
+``` 
